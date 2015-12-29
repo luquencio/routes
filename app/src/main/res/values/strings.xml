@@ -20,4 +20,7 @@
         completions."
     </string>
 
+    <!-- Strings related to routes -->
+    <string name="section_format">Route #: %1$d</string>
+
 </resources>

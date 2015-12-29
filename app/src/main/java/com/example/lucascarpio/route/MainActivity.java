@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.events) {
 
         } else if (id == R.id.routes) {
-
+            Intent intent = new Intent(MainActivity.this, routesActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.log_out) {
             ParseUser.logOut();
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
