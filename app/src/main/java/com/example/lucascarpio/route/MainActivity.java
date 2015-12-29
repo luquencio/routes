@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,11 +15,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+
 import com.parse.Parse;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +41,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // thi is the map on main activity
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,5 +114,35 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+
+        LatLng beginning = new LatLng(18.467002, -69.890872);
+        mMap.addMarker(new MarkerOptions().position(beginning).title("Here begin your Route!"));
+
+
+        List<LatLng> LatitudeLongitude = new ArrayList<LatLng>();
+
+        LatitudeLongitude.add(new LatLng(18.468063, -69.889471));
+        LatitudeLongitude.add(new LatLng(18.477357, -69.883604));
+        LatitudeLongitude.add(new LatLng(18.472640, -69.883812));
+        LatitudeLongitude.add(new LatLng(18.477401, -69.883589));
+        LatitudeLongitude.add(new LatLng(18.477429, -69.88273));
+
+        for (Iterator<LatLng> i =  LatitudeLongitude.iterator(); i.hasNext();) {
+            LatLng item = i.next();
+            mMap.addMarker(new MarkerOptions().position(item).title("Place"));
+        }
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(LatitudeLongitude.get(0)));
+
+        // mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(beginning, 19));
+
     }
 }
