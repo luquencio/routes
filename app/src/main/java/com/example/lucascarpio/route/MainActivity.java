@@ -3,8 +3,6 @@ package com.example.lucascarpio.route;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +21,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-import com.parse.Parse;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -103,9 +100,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.events) {
 
         } else if (id == R.id.routes) {
-            Intent intent = new Intent(MainActivity.this, routesActivity.class);
+            Intent intent = new Intent(MainActivity.this, RoutesActivity.class);
             startActivity(intent);
-            finish();
         } else if (id == R.id.log_out) {
             ParseUser.logOut();
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
