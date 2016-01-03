@@ -1,8 +1,11 @@
 package com.example.lucascarpio.route;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity
                 .title("You're here"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
 
-        checkLocation(latitude,longitude);
+        checkLocation(latitude, longitude);
     }
 
 
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
-                    Toast.makeText(this, "No estas en la Ciudad Colonial", Toast.LENGTH_LONG).show();
+                    dialogZCNotFound().show();
                 }
             }
             else
@@ -130,33 +133,31 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private static class GeocoderHandler extends Handler {
+    public AlertDialog dialogZCNotFound()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Fuera de la Zona Colonial")
+                .setMessage("Actualmente no te encuentras en la Zona Colonial. Algunos servicios " +
+                        "estaran desactivados. Si deseas una ruta para ir a la Zona Colonial pulsa " +
+                        "el boton de abajo.")
+                .setPositiveButton("Ir a la Zona Colonial", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=18.47401338,-69.88795931");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No, gracias", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-        private String mLocation = null;
+                    }
+                });
 
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
-            mLocation = locationAddress;
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        return builder.create();
     }
 
     @Override
