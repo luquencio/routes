@@ -20,10 +20,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseUser;
 
-public class RoutesActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class RoutesActivity extends AppCompatActivity
+                implements OnMapReadyCallback{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -138,5 +147,35 @@ public class RoutesActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    private GoogleMap mMap;
+
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+
+        LatLng beginning = new LatLng(18.467002, -69.890872);
+        mMap.addMarker(new MarkerOptions().position(beginning).title("Here begin your Route!"));
+
+
+        List<LatLng> LatitudeLongitude = new ArrayList<LatLng>();
+
+        LatitudeLongitude.add(new LatLng(18.468063, -69.889471));
+        LatitudeLongitude.add(new LatLng(18.477357, -69.883604));
+        LatitudeLongitude.add(new LatLng(18.472640, -69.883812));
+        LatitudeLongitude.add(new LatLng(18.477401, -69.883589));
+        LatitudeLongitude.add(new LatLng(18.477429, -69.88273));
+
+        for (Iterator<LatLng> i =  LatitudeLongitude.iterator(); i.hasNext();) {
+            LatLng item = i.next();
+            mMap.addMarker(new MarkerOptions().position(item).title("Place"));
+        }
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(LatitudeLongitude.get(0)));
+
+        // mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(beginning, 19));
+
     }
 }
