@@ -7,10 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,15 +19,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.location.places.Place;
+import com.example.lucascarpio.route.events.EventsActivity;
+import com.example.lucascarpio.route.places.PlacesActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.parse.Parse;
 import com.parse.ParseUser;
 
 import java.io.IOException;
@@ -49,12 +45,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //          .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this,PlacesActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -139,8 +136,8 @@ public class MainActivity extends AppCompatActivity
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Fuera de la Zona Colonial")
-                .setMessage("Actualmente no te encuentras en la Zona Colonial. Algunos servicios " +
-                        "estaran desactivados. Si deseas una ruta para ir a la Zona Colonial pulsa " +
+                .setMessage("Actualmente no te encuentras en la Zona Colonial. " +
+                        "Si deseas una ruta para ir a la Zona Colonial pulsa " +
                         "el boton de abajo.")
                 .setPositiveButton("Ir a la Zona Colonial", new DialogInterface.OnClickListener() {
                     @Override
@@ -182,8 +179,11 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.places) {
             Intent intent = new Intent(MainActivity.this,PlacesActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.events) {
-
+            Intent intent = new Intent(MainActivity.this,EventsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.routes) {
 
         } else if (id == R.id.log_out) {
@@ -197,4 +197,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

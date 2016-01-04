@@ -37,12 +37,21 @@
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name=".PlacesActivity"
+            android:name=".places.PlacesActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".PlaceDetail"
+            android:name=".places.PlaceDetail"
             android:label="@string/title_activity_place_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".events.EventsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".events.EventDetail"
+            android:label="@string/title_activity_event_detail"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

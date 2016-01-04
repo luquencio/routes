@@ -1,4 +1,4 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.places;
 
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;

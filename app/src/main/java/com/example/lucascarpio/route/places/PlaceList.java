@@ -1,4 +1,4 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.places;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.lucascarpio.route.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * Created by Fabio Ferreras on 1/3/2016.
  */
-public class PlaceFragment extends android.support.v4.app.Fragment {
+public class PlaceList extends android.support.v4.app.Fragment {
 
     private Context mContext;
     private String mCategory;
@@ -33,20 +34,20 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
     private Place[] mPlaces;
     private ListView mListView;
 
-    public PlaceFragment() {}
+    public PlaceList() {}
 
     @SuppressLint("ValidFragment")
-    public PlaceFragment(String category, Context context)
+    public PlaceList(String category, Context context)
     {
         mContext = context;
         mCategory = category;
-        Log.d("PlaceFragment", "PlaceFragment");
+        Log.d("PlaceList", "PlaceList");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("PlaceFragment", "onCreate");
+        Log.d("PlaceList", "onCreate");
         mPlaces = new Place[0];
     }
 
@@ -54,9 +55,9 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d("PlaceFragment", "onCreateView");
+        Log.d("PlaceList", "onCreateView");
 
-        View view = inflater.inflate(R.layout.fragment_place, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
 
         mListView = (ListView)view.findViewById(R.id.list);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +74,7 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
             query.whereEqualTo("categoria", mCategory);
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> places, ParseException e) {
-                Log.d("PlaceFragment", "done");
+                Log.d("PlaceList", "done");
                 if (e == null) {
                     List<Place> placesList = new ArrayList<>();
 
@@ -85,7 +86,7 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
                     mPlaces = placesList.toArray(new Place[placesList.size()]);
                     mListView.setAdapter(new PlaceAdapter(mPlaces, mContext));
                 } else {
-                    Log.d("PlaceFragment", e.toString());
+                    Log.d("PlaceList", e.toString());
                 }
             }
         });
@@ -99,15 +100,15 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
     {
         PlaceAdapter(Place[] places, Context context)
         {
-            super(context, R.layout.place_list_row, R.id.place_list_title, places);
+            super(context, R.layout.item_list_row, R.id.item_list_title, places);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
 
-            TextView placeName = (TextView)convertView.findViewById(R.id.place_list_title);
-            TextView placeAddress = (TextView)convertView.findViewById(R.id.place_list_address);
+            TextView placeName = (TextView)convertView.findViewById(R.id.item_list_title);
+            TextView placeAddress = (TextView)convertView.findViewById(R.id.item_list_address);
 
             placeName.setText(mPlaces[position].getName());
             placeAddress.setText(mPlaces[position].getAddress());

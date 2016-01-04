@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".places.PlaceDetail"
-    tools:showIn="@layout/activity_place_detail">
+    tools:context="com.example.lucascarpio.route.events.EventDetail"
+    tools:showIn="@layout/activity_event_detail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,14 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/place_detail_title"
+            android:id="@+id/event_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/place_detail_description"
+            android:id="@+id/event_detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="6dp"

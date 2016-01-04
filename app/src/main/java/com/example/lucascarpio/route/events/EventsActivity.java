@@ -1,4 +1,4 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.events;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,47 +15,48 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.lucascarpio.route.LoginActivity;
+import com.example.lucascarpio.route.MainActivity;
+import com.example.lucascarpio.route.R;
+import com.example.lucascarpio.route.places.PlacesActivity;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlacesActivity extends AppCompatActivity
+public class EventsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_places);
+        setContentView(R.layout.activity_events);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarPlaces);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.events_toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager)findViewById(R.id.events_viewpager);
         setupViewPager(viewPager);
 
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.events_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.events_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.events_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.places);
+        navigationView.setCheckedItem(R.id.events);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PlaceFragment("ALL", this), "TODOS");
-        adapter.addFragment(new PlaceFragment("MUSEO", this), "MUSEOS");
-        adapter.addFragment(new PlaceFragment("RESTAURANTE", this), "RESTAURANTES");
-        adapter.addFragment(new PlaceFragment("TEATRO", this), "TEATROS");
-        adapter.addFragment(new PlaceFragment("HOTEL", this), "HOTEL");
-        adapter.addFragment(new PlaceFragment("DISCO", this), "DISCO");
+        adapter.addFragment(new EventsList("ALL", this), "TODOS");
+        adapter.addFragment(new EventsList("MUSICAL", this), "MUSICALES");
+        adapter.addFragment(new EventsList("TEATRO", this), "TEATROS");
         viewPager.setAdapter(adapter);
     }
 
@@ -66,24 +67,27 @@ public class PlacesActivity extends AppCompatActivity
 
         if(id == R.id.main)
         {
-            Intent intent = new Intent(PlacesActivity.this,MainActivity.class);
+            Intent intent = new Intent(EventsActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
-        else if (id == R.id.events)
+        else if (id == R.id.places)
         {
-
+            Intent intent = new Intent(EventsActivity.this,PlacesActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.routes)
         {
 
         } else if (id == R.id.log_out)
         {
             ParseUser.logOut();
-            Intent intent = new Intent(PlacesActivity.this,LoginActivity.class);
+            Intent intent = new Intent(EventsActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.events_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -115,5 +119,12 @@ public class PlacesActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EventsActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
