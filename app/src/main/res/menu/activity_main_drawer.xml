@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/main"
+            android:title="Principal" />
+        <item
             android:id="@+id/places"
             android:title="Lugares" />
         <item

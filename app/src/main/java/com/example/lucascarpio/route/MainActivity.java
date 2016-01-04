@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.main);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
@@ -174,7 +175,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.places) {
+        if(id == R.id.main)
+        {
+
+        }
+        else if (id == R.id.places) {
             Intent intent = new Intent(MainActivity.this,PlacesActivity.class);
             startActivity(intent);
         } else if (id == R.id.events) {
