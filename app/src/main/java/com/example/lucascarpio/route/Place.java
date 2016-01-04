@@ -3,10 +3,12 @@ package com.example.lucascarpio.route;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
+import java.io.Serializable;
+
 /**
  * Created by Fabio Ferreras on 1/3/2016.
  */
-public class Place implements Comparable<Place>{
+public class Place implements Comparable<Place>, Serializable{
 
     private String mName;
     private String mDescription;

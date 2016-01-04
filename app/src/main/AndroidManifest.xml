@@ -40,6 +40,11 @@
             android:name=".PlacesActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".PlaceDetail"
+            android:label="@string/title_activity_place_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
