@@ -6,7 +6,7 @@ import com.parse.ParseObject;
 /**
  * Created by Fabio Ferreras on 1/3/2016.
  */
-public class Place {
+public class Place implements Comparable<Place>{
 
     private String mName;
     private String mDescription;
@@ -53,5 +53,10 @@ public class Place {
     @Override
     public String toString() {
         return mName;
+    }
+
+    @Override
+    public int compareTo(Place another) {
+        return mName.compareTo(another.getName());
     }
 }

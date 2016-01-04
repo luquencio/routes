@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -16,6 +17,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,6 +71,7 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
                         placesList.add(new Place(places.get(i)));
                     }
 
+                    Collections.sort(placesList);
                     mPlaces = placesList.toArray(new Place[placesList.size()]);
                     mListView.setAdapter(new PlaceAdapter(mPlaces, mContext));
                 } else {
@@ -86,7 +89,20 @@ public class PlaceFragment extends android.support.v4.app.Fragment {
     {
         PlaceAdapter(Place[] places, Context context)
         {
-            super(context, android.R.layout.simple_list_item_1, places);
+            super(context, R.layout.place_list_row, R.id.place_list_title, places);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = super.getView(position, convertView, parent);
+
+            TextView placeName = (TextView)convertView.findViewById(R.id.place_list_title);
+            TextView placeAddress = (TextView)convertView.findViewById(R.id.place_list_address);
+
+            placeName.setText(mPlaces[position].getName());
+            placeAddress.setText(mPlaces[position].getAddress());
+
+            return convertView;
         }
     }
 
