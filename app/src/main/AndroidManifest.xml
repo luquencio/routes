@@ -18,10 +18,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
         <activity
             android:name=".MainActivity"
@@ -36,6 +35,10 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".PlacesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

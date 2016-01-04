@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -174,7 +175,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.places) {
-
+            Intent intent = new Intent(MainActivity.this,PlacesActivity.class);
+            startActivity(intent);
         } else if (id == R.id.events) {
 
         } else if (id == R.id.routes) {
