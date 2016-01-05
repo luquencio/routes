@@ -19,9 +19,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Fabio Ferreras on 1/3/2016.
@@ -68,6 +71,7 @@ public class EventsList extends android.support.v4.app.Fragment {
         if(!mCategory.equals("ALL"))
             query.whereEqualTo("categoria", mCategory);
 
+        query.whereGreaterThanOrEqualTo("fecha", new Date());
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> event, ParseException e) {
                 if (e == null)
@@ -103,10 +107,12 @@ public class EventsList extends android.support.v4.app.Fragment {
             convertView = super.getView(position, convertView, parent);
 
             TextView placeName = (TextView)convertView.findViewById(R.id.item_list_title);
-            TextView placeAddress = (TextView)convertView.findViewById(R.id.item_list_address);
+            TextView placeDate = (TextView)convertView.findViewById(R.id.item_list_address);
 
             placeName.setText(mEvents[position].getName());
-            placeAddress.setText(mEvents[position].getAddress());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            placeDate.setText(dateFormat.format(mEvents[position].getDate()));
 
             return convertView;
         }

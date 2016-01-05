@@ -30,6 +30,9 @@ public class EventDetail extends AppCompatActivity implements OnMapReadyCallback
         TextView placeTitle = (TextView)findViewById(R.id.event_detail_title);
         placeTitle.setText(mEvent.getName());
 
+        TextView placeAddress = (TextView) findViewById(R.id.event_detail_address);
+        placeAddress.setText(mEvent.getAddress());
+
         TextView placeDescription = (TextView) findViewById(R.id.event_detail_description);
         placeDescription.setText(mEvent.getDescription());
 
