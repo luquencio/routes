@@ -46,14 +46,11 @@ public class EventsList extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEvents = new Event[0];
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        Log.d("PlaceList", "onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
@@ -70,25 +67,26 @@ public class EventsList extends android.support.v4.app.Fragment {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Events");
         if(!mCategory.equals("ALL"))
             query.whereEqualTo("categoria", mCategory);
+
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> event, ParseException e) {
-                if (e == null) {
+                if (e == null)
+                {
                     List<Event> eventsList = new ArrayList<>();
 
-                    for (int i = 0; i < event.size(); i++) {
+                    for (int i = 0; i < event.size(); i++)
                         eventsList.add(new Event(event.get(i)));
-                    }
 
                     Collections.sort(eventsList);
                     mEvents = eventsList.toArray(new Event[eventsList.size()]);
                     mListView.setAdapter(new PlaceAdapter(mEvents, mContext));
-                } else {
+                }
+                else
+                {
                     Log.d("PlaceList", e.toString());
                 }
             }
         });
-
-        mListView.setAdapter(new PlaceAdapter(mEvents, mContext));
 
         return view;
     }
@@ -109,8 +107,6 @@ public class EventsList extends android.support.v4.app.Fragment {
 
             placeName.setText(mEvents[position].getName());
             placeAddress.setText(mEvents[position].getAddress());
-
-            //convertView = View.inflate(mContext,R.layout.item_list_date,null);
 
             return convertView;
         }

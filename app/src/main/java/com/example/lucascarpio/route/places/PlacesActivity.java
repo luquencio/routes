@@ -54,6 +54,11 @@ public class PlacesActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        /*
+            Adding tabs
+            PlaceList -> Fragment
+               String -> Tab Name
+         */
         adapter.addFragment(new PlaceList("ALL", this), "TODOS");
         adapter.addFragment(new PlaceList("MUSEO", this), "MUSEOS");
         adapter.addFragment(new PlaceList("RESTAURANTE", this), "RESTAURANTES");
@@ -79,10 +84,12 @@ public class PlacesActivity extends AppCompatActivity
             Intent intent = new Intent(PlacesActivity.this,EventsActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.routes)
+        }
+        else if (id == R.id.routes)
         {
-
-        } else if (id == R.id.log_out)
+            //Move to Route's View
+        }
+        else if (id == R.id.log_out)
         {
             ParseUser.logOut();
             Intent intent = new Intent(PlacesActivity.this,LoginActivity.class);

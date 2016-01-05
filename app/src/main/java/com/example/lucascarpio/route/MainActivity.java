@@ -102,18 +102,12 @@ public class MainActivity extends AppCompatActivity
 
         Geocoder geocoder= new Geocoder(this, Locale.ENGLISH);
         try {
-
-            //Place your latitude and longitude
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
             if(addresses != null && addresses.size() > 0) {
                 Address address = addresses.get(0);
                 String subLocality = address.getSubLocality();
-                if(subLocality.equals("Ciudad Colonial"))
-                {
-                    Toast.makeText(this, "Estas en la Ciudad Colonial", Toast.LENGTH_LONG).show();
-                }
-                else
+                if(!subLocality.equals("Ciudad Colonial"))
                 {
                     dialogZCNotFound().show();
                 }
@@ -137,11 +131,14 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Fuera de la Zona Colonial")
                 .setMessage("Actualmente no te encuentras en la Zona Colonial. " +
-                        "Si deseas una ruta para ir a la Zona Colonial pulsa " +
-                        "el boton de abajo.")
+                        "Si deseas una ruta para ir a la Zona Colonial pulsa el boton de abajo.")
                 .setPositiveButton("Ir a la Zona Colonial", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        /*
+                            Open Google Maps and make a route from the current position
+                            to a hardcoded place inside the Colonial Zone
+                         */
                         Uri gmmIntentUri = Uri.parse("google.navigation:q=18.47401338,-69.88795931");
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity
                 .setNegativeButton("No, gracias", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        //Do nothing
                     }
                 });
 
@@ -172,11 +169,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.main)
-        {
-
-        }
-        else if (id == R.id.places) {
+        if (id == R.id.places) {
             Intent intent = new Intent(MainActivity.this,PlacesActivity.class);
             startActivity(intent);
             finish();
@@ -185,7 +178,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.routes) {
-
+            //Move to Route's View
         } else if (id == R.id.log_out) {
             ParseUser.logOut();
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);

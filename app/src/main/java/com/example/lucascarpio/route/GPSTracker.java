@@ -20,7 +20,6 @@ import android.util.Log;
 public class GPSTracker extends Service implements LocationListener {
 
     private Context mContext = null;
-    private boolean mCanGetLocation = false;
 
     Location mLocation;
     private double mLatitude, mLongitude;
@@ -48,12 +47,10 @@ public class GPSTracker extends Service implements LocationListener {
 
             if(!isGPSEnabled && !isNetworkEnabled)
             {
-                //DO SOMETHING
+                showSettingsAlert();
             }
             else
             {
-                mCanGetLocation = true;
-
                 if(isNetworkEnabled)
                 {
                     mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
@@ -127,10 +124,6 @@ public class GPSTracker extends Service implements LocationListener {
         }
 
         return mLongitude;
-    }
-
-    public boolean canGetLocation() {
-        return mCanGetLocation;
     }
 
     public void showSettingsAlert() {

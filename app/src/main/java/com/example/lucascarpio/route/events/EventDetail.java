@@ -41,6 +41,10 @@ public class EventDetail extends AppCompatActivity implements OnMapReadyCallback
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                    Open Google Maps and make a route from the current position
+                    to event's address.
+                 */
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mEvent.getLatitude() + "," +
                         mEvent.getLongitude());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -51,12 +55,15 @@ public class EventDetail extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         double latitude = mEvent.getLatitude();
         double longitude = mEvent.getLongitude();
+
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(mEvent.getName()));
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 18));
         googleMap.getUiSettings().setAllGesturesEnabled(false);
     }

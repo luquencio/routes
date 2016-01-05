@@ -52,8 +52,14 @@ public class EventsActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.events);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager)
+    {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        /*
+            Adding tabs
+            EventsList -> Fragment
+               String -> Tab Name
+         */
         adapter.addFragment(new EventsList("ALL", this), "TODOS");
         adapter.addFragment(new EventsList("MUSICAL", this), "MUSICALES");
         adapter.addFragment(new EventsList("TEATRO", this), "TEATROS");
@@ -76,10 +82,12 @@ public class EventsActivity extends AppCompatActivity
             Intent intent = new Intent(EventsActivity.this,PlacesActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.routes)
+        }
+        else if (id == R.id.routes)
         {
-
-        } else if (id == R.id.log_out)
+            //Move to Route's View
+        }
+        else if (id == R.id.log_out)
         {
             ParseUser.logOut();
             Intent intent = new Intent(EventsActivity.this,LoginActivity.class);

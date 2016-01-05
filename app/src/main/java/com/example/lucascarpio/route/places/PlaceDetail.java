@@ -41,6 +41,10 @@ public class PlaceDetail extends AppCompatActivity implements OnMapReadyCallback
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                    Open Google Maps and make a route from the current position
+                    to place's address.
+                 */
                 Uri gmmIntentUri = Uri.parse("google.navigation:q="+mPlace.getLatitude()+"," +
                         mPlace.getLongitude());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -55,9 +59,11 @@ public class PlaceDetail extends AppCompatActivity implements OnMapReadyCallback
     {
         double latitude = mPlace.getLatitude();
         double longitude = mPlace.getLongitude();
+
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(mPlace.getName()));
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 18));
         googleMap.getUiSettings().setAllGesturesEnabled(false);
     }

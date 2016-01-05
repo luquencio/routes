@@ -41,21 +41,16 @@ public class PlaceList extends android.support.v4.app.Fragment {
     {
         mContext = context;
         mCategory = category;
-        Log.d("PlaceList", "PlaceList");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("PlaceList", "onCreate");
-        mPlaces = new Place[0];
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        Log.d("PlaceList", "onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
@@ -72,26 +67,28 @@ public class PlaceList extends android.support.v4.app.Fragment {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Places");
         if(!mCategory.equals("ALL"))
             query.whereEqualTo("categoria", mCategory);
+
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> places, ParseException e) {
-                Log.d("PlaceList", "done");
-                if (e == null) {
+
+                if (e == null)
+                {
                     List<Place> placesList = new ArrayList<>();
 
-                    for (int i = 0; i < places.size(); i++) {
+                    for (int i = 0; i < places.size(); i++)
                         placesList.add(new Place(places.get(i)));
-                    }
+
 
                     Collections.sort(placesList);
                     mPlaces = placesList.toArray(new Place[placesList.size()]);
                     mListView.setAdapter(new PlaceAdapter(mPlaces, mContext));
-                } else {
+                }
+                else
+                {
                     Log.d("PlaceList", e.toString());
                 }
             }
         });
-
-        mListView.setAdapter(new PlaceAdapter(mPlaces, mContext));
 
         return view;
     }
