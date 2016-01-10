@@ -16,6 +16,7 @@ public class Place implements Comparable<Place>, Serializable{
     private String mAddress;
     private double mLatitude;
     private double mLongitude;
+    private String mImageURL;
 
     Place(ParseObject place)
     {
@@ -26,6 +27,7 @@ public class Place implements Comparable<Place>, Serializable{
         ParseGeoPoint geoPoint = place.getParseGeoPoint("location");
         mLatitude = geoPoint.getLatitude();
         mLongitude = geoPoint.getLongitude();
+        mImageURL = place.getString("imageurl");
     }
 
     public String getName() {
@@ -50,6 +52,11 @@ public class Place implements Comparable<Place>, Serializable{
 
     public double getLongitude() {
         return mLongitude;
+    }
+
+    public String getImageURL()
+    {
+        return mImageURL;
     }
 
     @Override
