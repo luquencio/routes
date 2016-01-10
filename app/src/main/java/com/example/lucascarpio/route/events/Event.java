@@ -19,6 +19,7 @@ public class Event implements Comparable<Event>, Serializable{
     private String mCategory;
     private double mLatitude;
     private double mLongitude;
+    private String mImageURL;
 
     Event(ParseObject event)
     {
@@ -30,6 +31,7 @@ public class Event implements Comparable<Event>, Serializable{
         ParseGeoPoint geoPoint = event.getParseGeoPoint("location");
         mLatitude = geoPoint.getLatitude();
         mLongitude = geoPoint.getLongitude();
+        mImageURL = event.getString("imageurl");
     }
 
     public String getName() {
@@ -58,6 +60,10 @@ public class Event implements Comparable<Event>, Serializable{
 
     public double getLongitude() {
         return mLongitude;
+    }
+
+    public String getImageURL() {
+        return mImageURL;
     }
 
     @Override

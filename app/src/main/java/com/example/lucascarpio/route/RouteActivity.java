@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.ParseUser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,7 +52,7 @@ public class RouteActivity extends AppCompatActivity
 
     private ListView myListView;
 
-    private Route[] Routes;
+    private Route[] mRoutes;
 
 
     //THAT THE HARDCODE BEGIN!
@@ -81,17 +82,25 @@ public class RouteActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        List<Route> RouteList = new ArrayList<>();
+
+        for (int i = 0; i <3 ; i++ ){
+            RouteList.add(new Route("Ruta #" + i, "Blablabla", "Blablabla 2"));
+
+            mRoutes = RouteList.toArray(new Route[RouteList.size()]);
+            myListView.setAdapter(new ListAdapter(mRoutes));
+        }
+
+
+
+
         myListView = (ListView) myListView.findViewById(R.id.list);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
-            public void onClickItem(AdapterView<?> parent, View view, int position, long id){
-                Intent i = new Intent();
-                i.putExtra();
-                startActivity(i);
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
         });
 
 
@@ -131,9 +140,9 @@ public class RouteActivity extends AppCompatActivity
 
     private class ListAdapter extends ArrayAdapter<Route> {
 
-        ListAdapter(Route[] routes, Context context)
+        ListAdapter(Route[] routes)
         {
-            super(context, R.layout.item_list_row, R.id.item_list_title, routes);
+            super(RouteActivity.this, R.layout.item_list_row, R.id.item_list_title, routes);
         }
 
     }

@@ -1,11 +1,13 @@
 package com.example.lucascarpio.route.places;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lucascarpio.route.R;
@@ -15,6 +17,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 public class PlaceDetail extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -36,6 +39,9 @@ public class PlaceDetail extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_place);
         mapFragment.getMapAsync(this);
+
+        ImageView image = (ImageView)findViewById(R.id.place_detail_image);
+        Picasso.with(this).load(mPlace.getImageURL()).into(image);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_place_detail);
         fab.setOnClickListener(new View.OnClickListener() {
