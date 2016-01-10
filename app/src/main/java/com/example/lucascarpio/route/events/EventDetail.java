@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lucascarpio.route.R;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 public class EventDetail extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -39,6 +41,9 @@ public class EventDetail extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_event);
         mapFragment.getMapAsync(this);
+
+        ImageView image = (ImageView)findViewById(R.id.event_detail_image);
+        Picasso.with(this).load(mEvent.getImageURL()).into(image);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_event_detail);
         fab.setOnClickListener(new View.OnClickListener() {
