@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.*;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -18,9 +19,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lucascarpio.route.events.Event;
@@ -42,9 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class RouteActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
-
-    SupportMapFragment mapFragment;
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     public List<LatLng> Route1;
     public List<LatLng> Route2;
@@ -78,63 +79,38 @@ public class RouteActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.route_toolbar);
         setSupportActionBar(toolbar);
 
+        myListView = (ListView)findViewById(R.id.route_list);
 
+        // ADDING ROUTE #1
         List<Route> RouteList = new ArrayList<>();
-
-        for (int i = 0; i <3 ; i++ ){
-            RouteList.add(new Route("Ruta #" + i, "Blablabla", "Blablabla 2"));
-
-            mRoutes = RouteList.toArray(new Route[RouteList.size()]);
-            myListView.setAdapter(new ListAdapter(mRoutes));
-        }
-
-
-
-
-        myListView = (ListView) myListView.findViewById(R.id.list);
+        RouteList.add(new Route("Ruta #1", "Blablabla", "Blablabla 2", Route1));
+        mRoutes = RouteList.toArray(new Route[RouteList.size()]);
+        myListView.setAdapter(new ListAdapter(mRoutes));
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //  Intent intent = new Intent(RouteActivity.this, RouteDetail.class);
+                //intent.putExtra("Route", mRoutes[position]);
+                //startActivity(intent);
 
             }
         });
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RouteActivity.this,PlacesActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.route_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.route_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.main);
+        navigationView.setCheckedItem(R.id.routes);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
-            // Send user to LoginActivity.class
-            Intent intent = new Intent(RouteActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
     }
 
@@ -142,90 +118,23 @@ public class RouteActivity extends AppCompatActivity
 
         ListAdapter(Route[] routes)
         {
-            super(RouteActivity.this, R.layout.item_list_row, R.id.item_list_title, routes);
+//            super(RouteActivity.this, R.layout.route_list_row, R.id.route_row_title, routes);
+            super(RouteActivity.this, android.R.layout.simple_list_item_1, routes);
+            Log.d("RouteActivity con droga", String.valueOf(routes.length));
         }
 
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        GPSTracker gpsTracker = new GPSTracker(this);
-        gpsTracker.getLocation();
-
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(latitude, longitude))
-                .title("You're here"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
-
-        checkLocation(latitude, longitude);
-
-
-        //Polygon
-        googleMap.addPolyline(makePolygon(Route1));
-    }
-
-
-    //Check if the current position is inside the area of the Colonial Zone
-    public void checkLocation(double latitude, double longitude) {
-
-        Geocoder geocoder= new Geocoder(this, Locale.ENGLISH);
-        try {
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-
-            if(addresses != null && addresses.size() > 0) {
-                Address address = addresses.get(0);
-                String subLocality = address.getSubLocality();
-                if(!subLocality.equals("Ciudad Colonial"))
-                {
-                    dialogZCNotFound().show();
-                }
-            }
-            else
-            {
-                Toast.makeText(this, "Can't get your current location", Toast.LENGTH_LONG).show();
-            }
-
-
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Could not get address..!", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public AlertDialog dialogZCNotFound()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(RouteActivity.this);
-        builder.setTitle("Fuera de la Zona Colonial")
-                .setMessage("Actualmente no te encuentras en la Zona Colonial. " +
-                        "Si deseas una ruta para ir a la Zona Colonial pulsa el boton de abajo.")
-                .setPositiveButton("Ir a la Zona Colonial", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        /*
-                            Open Google Maps and make a route from the current position
-                            to a hardcoded place inside the Colonial Zone
-                         */
-                        Uri gmmIntentUri = Uri.parse("google.navigation:q=18.477451,-69.882721");
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-                        startActivity(mapIntent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("No, gracias", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Do nothing
-                    }
-                });
-
-        return builder.create();
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            convertView = super.getView(position, convertView, parent);
+//
+//            TextView textTitle = (TextView)convertView.findViewById(R.id.route_row_title);
+//            TextView textDescription = (TextView)convertView.findViewById(R.id.route_row_description);
+//
+//            textTitle.setText(mRoutes[position].getName());
+//            textDescription.setText(mRoutes[position].getDescription());
+//
+//            return convertView;
+//        }
     }
 
     @Override
@@ -249,8 +158,6 @@ public class RouteActivity extends AppCompatActivity
             Intent intent = new Intent(RouteActivity.this,EventsActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.routes) {
-            //Move to Route's View
         } else if (id == R.id.log_out) {
             ParseUser.logOut();
             Intent intent = new Intent(RouteActivity.this,LoginActivity.class);
@@ -258,7 +165,7 @@ public class RouteActivity extends AppCompatActivity
             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.route_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

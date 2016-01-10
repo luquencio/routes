@@ -3,7 +3,7 @@
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/events_drawer_layout"
+android:id="@+id/route_drawer_layout"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:fitsSystemWindows="true"
@@ -22,7 +22,7 @@ tools:openDrawer="start">
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/events_toolbar"
+                android:id="@+id/route_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -30,13 +30,13 @@ tools:openDrawer="start">
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/events_viewpager"
+            android:id="@+id/route_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/route_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -45,7 +45,7 @@ tools:openDrawer="start">
     </android.support.design.widget.CoordinatorLayout>
 
 <android.support.design.widget.NavigationView
-    android:id="@+id/events_nav_view"
+    android:id="@+id/route_nav_view"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
