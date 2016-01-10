@@ -65,6 +65,7 @@ public class PlacesActivity extends AppCompatActivity
         adapter.addFragment(new PlaceList("TEATRO", this), "TEATROS");
         adapter.addFragment(new PlaceList("HOTEL", this), "HOTEL");
         adapter.addFragment(new PlaceList("DISCO", this), "DISCO");
+        adapter.addFragment(new PlaceList("IGLESIA", this), "IGLESIA");
         viewPager.setAdapter(adapter);
     }
 

@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
                             Open Google Maps and make a route from the current position
                             to a hardcoded place inside the Colonial Zone
                          */
-                        Uri gmmIntentUri = Uri.parse("google.navigation:q=18.47401338,-69.88795931");
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=18.477451,-69.882721");
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
                         startActivity(mapIntent);
