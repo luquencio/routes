@@ -27,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.ParseUser;
 
 import java.io.IOException;
@@ -94,6 +95,18 @@ public class MainActivity extends AppCompatActivity
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
 
         checkLocation(latitude, longitude);
+
+
+        //Polygon
+        PolylineOptions lineOption = new PolylineOptions();
+        lineOption.add(new LatLng(18.47157903, -69.89128187)); //Inicio Conde
+        lineOption.add(new LatLng(18.47388613, -69.88360774)); //Fin Conde (Parque Colon)
+        lineOption.add(new LatLng(18.47233079,-69.8832956)); //Catedral
+        lineOption.add(new LatLng(18.47260904,-69.88252312)); //Esquina luego de Catedral
+        lineOption.add(new LatLng(18.47552095, -69.88294691)); //Alcazar de Colon
+        lineOption.width(9);
+        lineOption.color(R.color.colorPrimaryDark);
+        googleMap.addPolyline(lineOption);
     }
 
 
