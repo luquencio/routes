@@ -1,6 +1,7 @@
 package com.example.lucascarpio.route;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
@@ -17,8 +18,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.lucascarpio.route.events.Event;
+import com.example.lucascarpio.route.events.EventDetail;
 import com.example.lucascarpio.route.events.EventsActivity;
 import com.example.lucascarpio.route.places.PlacesActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,6 +48,10 @@ public class RouteActivity extends AppCompatActivity
     public List<LatLng> Route1;
     public List<LatLng> Route2;
     public List<LatLng> Route3;
+
+    private ListView myListView;
+
+    private Route[] Routes;
 
 
     //THAT THE HARDCODE BEGIN!
@@ -69,6 +79,21 @@ public class RouteActivity extends AppCompatActivity
         setContentView(R.layout.activity_route);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        myListView = (ListView) myListView.findViewById(R.id.list);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onClickItem(AdapterView<?> parent, View view, int position, long id){
+                Intent i = new Intent();
+                i.putExtra();
+                startActivity(i);
+            }
+
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +126,15 @@ public class RouteActivity extends AppCompatActivity
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+    }
+
+    private class ListAdapter extends ArrayAdapter<Route> {
+
+        ListAdapter(Route[] routes, Context context)
+        {
+            super(context, R.layout.item_list_row, R.id.item_list_title, routes);
+        }
 
     }
 

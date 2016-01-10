@@ -35,6 +35,13 @@ tools:openDrawer="start">
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
     </android.support.design.widget.CoordinatorLayout>
 
 <android.support.design.widget.NavigationView
