@@ -83,6 +83,16 @@ public class RouteActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.route_toolbar);
         setSupportActionBar(toolbar);
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.route_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.route_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.routes);
+
         myListView = (ListView)findViewById(R.id.route_list);
 
         // ADDING ROUTE #1
@@ -100,41 +110,27 @@ public class RouteActivity extends AppCompatActivity
 
             }
         });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.route_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.route_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.routes);
-
-
     }
 
     private class ListAdapter extends ArrayAdapter<Route> {
 
         ListAdapter(Route[] routes)
         {
-//            super(RouteActivity.this, R.layout.route_list_row, R.id.route_row_title, routes);
-            super(RouteActivity.this, android.R.layout.simple_list_item_1, routes);
-            Log.d("RouteActivity con droga", String.valueOf(routes.length));
+            super(RouteActivity.this, R.layout.route_list_row, R.id.route_row_title, routes);
         }
 
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            convertView = super.getView(position, convertView, parent);
-//
-//            TextView textTitle = (TextView)convertView.findViewById(R.id.route_row_title);
-//            TextView textDescription = (TextView)convertView.findViewById(R.id.route_row_description);
-//
-//            textTitle.setText(mRoutes[position].getName());
-//            textDescription.setText(mRoutes[position].getDescription());
-//
-//            return convertView;
-//        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = super.getView(position, convertView, parent);
+
+            TextView textTitle = (TextView)convertView.findViewById(R.id.route_row_title);
+            TextView textDescription = (TextView)convertView.findViewById(R.id.route_row_description);
+
+            textTitle.setText(mRoutes[position].getName());
+            textDescription.setText(mRoutes[position].getDescription());
+
+            return convertView;
+        }
     }
 
     @Override

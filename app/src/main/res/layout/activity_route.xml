@@ -29,28 +29,29 @@ tools:openDrawer="start">
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/route_viewpager"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.example.lucascarpio.route.RouteActivity">
 
-        <ListView
-            android:id="@+id/route_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/route_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
 
-        </ListView>
+        </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 
-<android.support.design.widget.NavigationView
-    android:id="@+id/route_nav_view"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:fitsSystemWindows="true"
-    app:headerLayout="@layout/nav_header_main"
-    app:menu="@menu/activity_main_drawer" />
+    <android.support.design.widget.NavigationView
+        android:id="@+id/route_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

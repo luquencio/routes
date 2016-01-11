@@ -112,5 +112,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_event_detail">EventDetail</string>
-
+    <string name="title_activity_route">Rutas</string>
+    <string name="title_activity_event">Eventos</string>
+    <string name="title_activity_places">Lugares</string>
 </resources>

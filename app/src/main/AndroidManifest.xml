@@ -38,6 +38,7 @@
         </activity>
         <activity
             android:name=".places.PlacesActivity"
+            android:label="@string/title_activity_places"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -47,6 +48,7 @@
         </activity>
         <activity
             android:name=".events.EventsActivity"
+            android:label="@string/title_activity_event"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -56,7 +58,7 @@
         </activity>
         <activity
             android:name=".RouteActivity"
-            android:label="@string/title_activity_event_detail"
+            android:label="@string/title_activity_route"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
