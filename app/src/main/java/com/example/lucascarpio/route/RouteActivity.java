@@ -1,15 +1,7 @@
 package com.example.lucascarpio.route;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.*;
-import android.location.Address;
-import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,32 +16,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.lucascarpio.route.events.Event;
-import com.example.lucascarpio.route.events.EventDetail;
 import com.example.lucascarpio.route.events.EventsActivity;
 import com.example.lucascarpio.route.places.PlacesActivity;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.ParseUser;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class RouteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public List<LatLng> Route1;
-    public List<LatLng> Route2;
-    public List<LatLng> Route3;
+    public List<LatLng> SaturdayRoute;
+    public List<LatLng> MuseumRoute;
+    public List<LatLng> ChurchRoute;
 
     private ListView myListView;
 
@@ -57,22 +39,37 @@ public class RouteActivity extends AppCompatActivity
 
 
     //THAT THE HARDCODE BEGIN!
-    public void setRoute1(List<LatLng> route1) {
-        route1.add(new LatLng(18.47157903, -69.89128187)); //Inicio Conde
-        route1.add(new LatLng(18.47388613, -69.88360774)); //Fin Conde (Parque Colon)
-        route1.add(new LatLng(18.47233079, -69.8832956)); //Catedral
-        route1.add(new LatLng(18.47260904, -69.88252312)); //Esquina luego de Catedral
-        route1.add(new LatLng(18.47552095, -69.88294691)); //Alcazar de Colon
+    public void setSaturdayRoute(List<LatLng> route) {
+        route.add(new LatLng(18.47157903, -69.89128187));
+        route.add(new LatLng(18.47388613, -69.88360774));
+        route.add(new LatLng(18.47233079, -69.8832956));
+        route.add(new LatLng(18.47260904, -69.88252312));
+        route.add(new LatLng(18.47552095, -69.88294691));
 
-        Route1 = route1;
+        SaturdayRoute = route;
     }
 
-    public void setRoute2(List<LatLng> route2) {
-        Route2 = route2;
+
+    public void setMuseumRoute(List<LatLng> route){
+        route.add(new LatLng(18.477733,-69.8843144));
+        route.add(new LatLng(18.477451,-69.88272));
+        route.add(new LatLng(18.4759193,-69.8832859));
+        route.add(new LatLng(18.47516, -69.8830018));
+        route.add(new LatLng(18.4732, -69.88171));
+
+        MuseumRoute = route;
     }
 
-    public void setRoute3(List<LatLng> route3) {
-        Route3 = route3;
+    public void setChurchRoute(List<LatLng> route) {
+
+        route.add(new LatLng(18.4755489,-69.8827082));
+        route.add(new LatLng(18.4752527,-69.8855812));
+        route.add(new LatLng(18.4734974,-69.888422));
+        route.add(new LatLng(18.4715111,-69.8887834));
+        route.add(new LatLng(18.4706267,-69.887055));
+        route.add(new LatLng(18.4722526,-69.8833932));
+
+        ChurchRoute = route;
     }
 
     @Override
@@ -97,7 +94,9 @@ public class RouteActivity extends AppCompatActivity
 
         // ADDING ROUTE #1
         List<Route> RouteList = new ArrayList<>();
-        RouteList.add(new Route("Ruta #1", "Blablabla", "Blablabla 2", Route1));
+        RouteList.add(new Route("Saturday Nights", "Enjoy the best places for hangout on La Zona Colonial.", "Blablabla", SaturdayRoute));
+        RouteList.add(new Route("Museum Route", "Take a look for a important cultural places on La Zona Colonial.","", MuseumRoute));
+        RouteList.add(new Route("Church Routes","See over uppon Catholic places. \nIdeal for Sundays and Family trips.","",ChurchRoute));
         mRoutes = RouteList.toArray(new Route[RouteList.size()]);
         myListView.setAdapter(new ListAdapter(mRoutes));
 
