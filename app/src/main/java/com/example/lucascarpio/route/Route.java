@@ -36,6 +36,10 @@ public class Route implements Serializable{
         return mUrl;
     }
 
+    public String getmUrl() {
+        return mUrl;
+    }
+
     public List<LatLng> getLocations() {
         return mLocations;
     }

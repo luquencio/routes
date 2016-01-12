@@ -1,6 +1,7 @@
 package com.example.lucascarpio.route;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.example.lucascarpio.route.places.PlacesActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +95,9 @@ public class RouteActivity extends AppCompatActivity
 
         myListView = (ListView)findViewById(R.id.route_list);
 
+        //ImageView image = (ImageView)findViewById(R.id.route_row_image);
+        //Picasso.with(this).load();
+
         // ADDING ROUTE #1
         List<Route> RouteList = new ArrayList<>();
         RouteList.add(new Route("Saturday Nights", "Enjoy the best places for hangout on La Zona Colonial.", "Blablabla", SaturdayRoute));
@@ -103,9 +109,9 @@ public class RouteActivity extends AppCompatActivity
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //  Intent intent = new Intent(RouteActivity.this, RouteDetail.class);
-                //intent.putExtra("Route", mRoutes[position]);
-                //startActivity(intent);
+                 Intent intent = new Intent(RouteActivity.this, RouteDetail.class);
+                intent.putExtra("Route", mRoutes[position]);
+                startActivity(intent);
 
             }
         });

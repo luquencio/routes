@@ -21,6 +21,8 @@ import com.squareup.picasso.Picasso;
 public class EventDetail extends AppCompatActivity implements OnMapReadyCallback{
 
     Event mEvent;
+    SupportMapFragment mapFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +76,6 @@ public class EventDetail extends AppCompatActivity implements OnMapReadyCallback
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 18));
         googleMap.getUiSettings().setAllGesturesEnabled(false);
+
     }
 }
