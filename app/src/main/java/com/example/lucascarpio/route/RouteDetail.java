@@ -20,7 +20,7 @@ public class RouteDetail extends Activity{
         setContentView(R.layout.activity_route_detail);
 
         mMyBrowser = (WebView)findViewById(R.id.view_route);
-        mMyBrowser.loadUrl("https://google.com");
+        mMyBrowser.loadUrl("file:///android_asset/pg.html");
         mMyBrowser.getSettings().setJavaScriptEnabled(true);
 
     }
