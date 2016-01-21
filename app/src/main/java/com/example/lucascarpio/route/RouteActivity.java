@@ -172,14 +172,4 @@ public class RouteActivity extends AppCompatActivity
     }
 
 
-    public PolylineOptions makePolygon(List<LatLng> Route) {
-
-        PolylineOptions Drawler = new PolylineOptions();
-        Drawler.addAll(Route);
-        Drawler.width(9);
-        Drawler.color(R.color.colorPrimaryDark);
-
-        return Drawler;
-    }
-
 }

@@ -115,4 +115,7 @@
     <string name="title_activity_route">Rutas</string>
     <string name="title_activity_event">Eventos</string>
     <string name="title_activity_places">Lugares</string>
+    <string name="title_activity_route_map_detail">RouteMapDetailActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
