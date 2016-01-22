@@ -186,9 +186,12 @@ public class PlacesActivity extends AppCompatActivity
             action.setDisplayShowCustomEnabled(false); //disable a custom view inside the actionbar
             action.setDisplayShowTitleEnabled(true); //show the title in the action bar
 
+            setupViewPager(mViewPager);
+
             //hides the keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(edtSeach.getWindowToken(), 0);
+            View view = this.getCurrentFocus();
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
             isSearchOpened = false;
         } else {
@@ -227,10 +230,10 @@ public class PlacesActivity extends AppCompatActivity
     private void doSearch()
     {
         String query = edtSeach.getText().toString();
-        handleMenuSearch();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        View view = this.getCurrentFocus();
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//        handleMenuSearch();
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        View view = this.getCurrentFocus();
+//        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new PlaceList("ALL", this, query), "TODOS");
