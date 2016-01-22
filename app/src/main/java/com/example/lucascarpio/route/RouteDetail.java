@@ -19,8 +19,9 @@ public class RouteDetail extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
 
+
         mMyBrowser = (WebView)findViewById(R.id.view_route);
-        mMyBrowser.loadUrl("file:///android_asset/pg.html");
+        mMyBrowser.loadUrl("file:///android_asset/MuseumRoutes.html");
         mMyBrowser.getSettings().setJavaScriptEnabled(true);
 
     }
