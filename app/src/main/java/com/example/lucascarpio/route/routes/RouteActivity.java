@@ -180,5 +180,10 @@ public class RouteActivity extends AppCompatActivity
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RouteActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
