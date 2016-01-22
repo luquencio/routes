@@ -4,6 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Waypoints in directions</title>
+    <script src="/js/jquery-1.10.1.min.js"></script>
     <style>
         html, body {
         height: 100%;
@@ -44,23 +45,31 @@
     <div>
         <b>Inicio:</b>
         <select id="start">
-            <option value="Alcázar de Don Diego Colón, Santo Domingo, República Dominicana">Alcazar de Don Diego Colón</option>
-        </select>
-        <br>
-        <b>Paradas:</b>
-        <i>(Seleccion multipe)</i> <br>
-        <select multiple id="waypoints">
             <option value="Capilla de los Remedios, Calle Las Damas, Zona Colonial, Santo Domingo, República Dominicana">Capilla de los Remedios</option>
             <option value="Iglesia Nuestra Señora de la Altagracia, Calle Hostos, Zona Colonial, Santo Domingo, República Dominicana">Nuestra Señora de la Altagracia</option>
             <option value="Convento de los Dominicos, Calle Padre Billini,Santo Domingo 10210, Santo Domingo, Distrito Nacional">Convento de los Dominicos</option>
             <option value="Iglesia Nuestra Señora del Carmen, Calle Arzobispo Nouel, Zona Colonial, Santo Domingo,  República Dominicana">Nuestra Señora del Carmen</option>
             <option value="Iglesia y Convento Regina Angelorum, Calle Padre Billini, Zona Colonial, Santo Domingo 10210, República Dominicana">Regina Angelorum</option>
-
         </select>
         <br>
         <b>Fin:</b>
         <select id="end">
-            <option value="Catedral Primada de América, Calle Isabel La Católica, Santo Domingo 10210">Catedral Primada de América</option>
+            <option value="Iglesia Nuestra Señora de la Altagracia, Calle Hostos, Zona Colonial, Santo Domingo, República Dominicana">Nuestra Señora de la Altagracia</option>
+            <option value="Convento de los Dominicos, Calle Padre Billini,Santo Domingo 10210, Santo Domingo, Distrito Nacional">Convento de los Dominicos</option>
+            <option value="Iglesia Nuestra Señora del Carmen, Calle Arzobispo Nouel, Zona Colonial, Santo Domingo,  República Dominicana">Nuestra Señora del Carmen</option>
+            <option value="Iglesia y Convento Regina Angelorum, Calle Padre Billini, Zona Colonial, Santo Domingo 10210, República Dominicana">Regina Angelorum</option>
+            <option value="Capilla de los Remedios, Calle Las Damas, Zona Colonial, Santo Domingo, República Dominicana">Capilla de los Remedios</option>
+        </select>
+        <br>
+        <b>Paradas:</b>
+        <i>(Seleccion multipe)</i> <br>
+        <select multiple id="waypoints">
+            <option value="Iglesia Nuestra Señora de la Altagracia, Calle Hostos, Zona Colonial, Santo Domingo, República Dominicana">Nuestra Señora de la Altagracia</option>
+            <option value="Capilla de los Remedios, Calle Las Damas, Zona Colonial, Santo Domingo, República Dominicana">Capilla de los Remedios</option>
+            <option value="Convento de los Dominicos, Calle Padre Billini,Santo Domingo 10210, Santo Domingo, Distrito Nacional">Convento de los Dominicos</option>
+            <option value="Iglesia Nuestra Señora del Carmen, Calle Arzobispo Nouel, Zona Colonial, Santo Domingo,  República Dominicana">Nuestra Señora del Carmen</option>
+            <option value="Iglesia y Convento Regina Angelorum, Calle Padre Billini, Zona Colonial, Santo Domingo 10210, República Dominicana">Regina Angelorum</option>
+
         </select>
         <br>
         <input type="submit" id="submit" value="Generar ruta">
@@ -146,6 +155,7 @@
         }
       });
     }
+
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAHmko1nE6PodPewShv9oqwramao1p1aw&signed_in=true&callback=initMap"
         async defer></script>
