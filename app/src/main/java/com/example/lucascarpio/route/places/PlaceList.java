@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -106,9 +107,36 @@ public class PlaceList extends android.support.v4.app.Fragment {
 
             TextView placeName = (TextView)convertView.findViewById(R.id.item_list_title);
             TextView placeAddress = (TextView)convertView.findViewById(R.id.item_list_address);
+            ImageView icon = (ImageView)convertView.findViewById(R.id.item_list_icon);
 
             placeName.setText(mPlaces[position].getName());
             placeAddress.setText(mPlaces[position].getAddress());
+
+            String category = mPlaces[position].getCategory();
+            if(category.equals("MUSEO"))
+            {
+                icon.setImageResource(R.drawable.museum);
+            }
+            else if (category.equals("RESTAURANTE"))
+            {
+                icon.setImageResource(R.drawable.restaurant);
+            }
+            else if (category.equals("TEATRO"))
+            {
+                icon.setImageResource(R.drawable.theater);
+            }
+            else if (category.equals("HOTEL"))
+            {
+                icon.setImageResource(R.drawable.bed);
+            }
+            else if (category.equals("DISCO"))
+            {
+                icon.setImageResource(R.drawable.drink);
+            }
+            else if (category.equals("IGLESIA"))
+            {
+                icon.setImageResource(R.drawable.church);
+            }
 
             return convertView;
         }

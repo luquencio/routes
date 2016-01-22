@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -108,11 +109,23 @@ public class EventsList extends android.support.v4.app.Fragment {
 
             TextView placeName = (TextView)convertView.findViewById(R.id.item_list_title);
             TextView placeDate = (TextView)convertView.findViewById(R.id.item_list_address);
+            ImageView icon = (ImageView)convertView.findViewById(R.id.item_list_icon);
 
             placeName.setText(mEvents[position].getName());
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             placeDate.setText(dateFormat.format(mEvents[position].getDate()));
+
+            String category = mEvents[position].getCategory();
+
+            if (category.equals("TEATRO"))
+            {
+                icon.setImageResource(R.drawable.theater);
+            }
+            else if (category.equals("MUSICAL"))
+            {
+                icon.setImageResource(R.drawable.music);
+            }
 
             return convertView;
         }

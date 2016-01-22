@@ -2,6 +2,8 @@ package com.example.lucascarpio.route.routes;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.example.lucascarpio.route.R;
@@ -21,6 +23,14 @@ public class RouteDetail extends Activity{
         setContentView(R.layout.activity_route_detail);
 
         mMyBrowser = (WebView)findViewById(R.id.view_route);
+        mMyBrowser.getSettings().setJavaScriptEnabled(true);
+
+        mMyBrowser.setWebChromeClient(new WebChromeClient(){
+           public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+               // callback.invoke(String origin, boolean allow, boolean remember);
+               callback.invoke(origin, true, false);
+           }
+       });
 
         mRoute = (Route)getIntent().getSerializableExtra("Route");
 
@@ -36,9 +46,6 @@ public class RouteDetail extends Activity{
         if (mRoute.getName().equals("Custom Routes")){
             mMyBrowser.loadUrl("file:///android_asset/CustomRoutes.html");
         }
-
-        mMyBrowser.getSettings().setJavaScriptEnabled(true);
-
     }
 
 
