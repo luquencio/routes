@@ -35,6 +35,7 @@ public class RouteActivity extends AppCompatActivity
     public List<LatLng> SaturdayRoute;
     public List<LatLng> MuseumRoute;
     public List<LatLng> ChurchRoute;
+    public List<LatLng> CustomRoute;
 
     private ListView myListView;
 
@@ -103,6 +104,8 @@ public class RouteActivity extends AppCompatActivity
         RouteList.add(new Route("Saturday Nights", "Enjoy the best places for hangout on La Zona Colonial.", "Blablabla", SaturdayRoute));
         RouteList.add(new Route("Museum Route", "Take a look for a important cultural places on La Zona Colonial.","", MuseumRoute));
         RouteList.add(new Route("Church Routes","See over uppon Catholic places. \nIdeal for Sundays and Family trips.","",ChurchRoute));
+        RouteList.add(new Route("Custom Routes","Make your own route using our selected places.","",CustomRoute));
+
         mRoutes = RouteList.toArray(new Route[RouteList.size()]);
         myListView.setAdapter(new ListAdapter(mRoutes));
 
