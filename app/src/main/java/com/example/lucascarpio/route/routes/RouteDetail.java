@@ -1,9 +1,10 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.routes;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.webkit.WebView;
+
+import com.example.lucascarpio.route.R;
 
 /**
  * Created by lucasecarpio on 1/10/16.

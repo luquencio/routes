@@ -1,7 +1,6 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.routes;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,16 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.lucascarpio.route.LoginActivity;
+import com.example.lucascarpio.route.MainActivity;
+import com.example.lucascarpio.route.R;
 import com.example.lucascarpio.route.events.EventsActivity;
 import com.example.lucascarpio.route.places.PlacesActivity;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.ParseUser;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +152,12 @@ public class RouteActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.places) {
+        if(id == R.id.main)
+        {
+            Intent intent = new Intent(RouteActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.places) {
             Intent intent = new Intent(RouteActivity.this,PlacesActivity.class);
             startActivity(intent);
             finish();

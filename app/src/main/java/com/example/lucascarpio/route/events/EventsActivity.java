@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.example.lucascarpio.route.LoginActivity;
 import com.example.lucascarpio.route.MainActivity;
 import com.example.lucascarpio.route.R;
+import com.example.lucascarpio.route.routes.RouteActivity;
 import com.example.lucascarpio.route.places.PlacesActivity;
 import com.parse.ParseUser;
 
@@ -85,7 +86,9 @@ public class EventsActivity extends AppCompatActivity
         }
         else if (id == R.id.routes)
         {
-            //Move to Route's View
+            Intent intent = new Intent(EventsActivity.this,RouteActivity.class);
+            startActivity(intent);
+            finish();
         }
         else if (id == R.id.log_out)
         {

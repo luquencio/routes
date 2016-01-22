@@ -33,7 +33,7 @@ tools:openDrawer="start">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.example.lucascarpio.route.RouteActivity">
+            tools:context=".routes.RouteActivity">
 
             <ListView
                 android:id="@+id/route_list"

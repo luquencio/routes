@@ -20,7 +20,7 @@
         <menu>
             <item
                 android:id="@+id/log_out"
-                android:title="Log out" />
+                android:title="Cerrar Sesión" />
         </menu>
     </item>
 

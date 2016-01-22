@@ -1,4 +1,4 @@
-package com.example.lucascarpio.route;
+package com.example.lucascarpio.route.routes;
 
 import com.google.android.gms.maps.model.LatLng;
 
