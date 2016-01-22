@@ -31,6 +31,7 @@ public class PlaceList extends android.support.v4.app.Fragment {
 
     private Context mContext;
     private String mCategory;
+    private String mQuery = "";
 
     private Place[] mPlaces;
     private ListView mListView;
@@ -42,6 +43,14 @@ public class PlaceList extends android.support.v4.app.Fragment {
     {
         mContext = context;
         mCategory = category;
+    }
+
+    @SuppressLint("ValidFragment")
+    public PlaceList(String category, Context context, String query)
+    {
+        mContext = context;
+        mCategory = category;
+        mQuery = query;
     }
 
     @Override
@@ -65,7 +74,7 @@ public class PlaceList extends android.support.v4.app.Fragment {
             }
         });
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Places");
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Places");
         if(!mCategory.equals("ALL"))
             query.whereEqualTo("categoria", mCategory);
 
@@ -76,9 +85,26 @@ public class PlaceList extends android.support.v4.app.Fragment {
                 {
                     List<Place> placesList = new ArrayList<>();
 
-                    for (int i = 0; i < places.size(); i++)
-                        placesList.add(new Place(places.get(i)));
+                    if(mQuery.isEmpty())
+                    {
+                        for (int i = 0; i < places.size(); i++)
+                            placesList.add(new Place(places.get(i)));
+                    }
+                    else
+                    {
+                        Log.d("PlaceList", "SEARCH");
+                        for (int i = 0; i < places.size(); i++)
+                        {
+                            Place p = new Place(places.get(i));
+                            if(p.getName().matches("(?i).*"+mQuery+".*"))
+                            {
+                                placesList.add(p);
+                                Log.d("PlaceList", "Found");
+                            }
 
+                        }
+
+                    }
 
                     Collections.sort(placesList);
                     mPlaces = placesList.toArray(new Place[placesList.size()]);
@@ -141,5 +167,7 @@ public class PlaceList extends android.support.v4.app.Fragment {
             return convertView;
         }
     }
+
+
 
 }
