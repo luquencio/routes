@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -95,15 +96,15 @@ public class RouteActivity extends AppCompatActivity
 
         myListView = (ListView)findViewById(R.id.route_list);
 
-        //ImageView image = (ImageView)findViewById(R.id.route_row_image);
-        //Picasso.with(this).load();
-
-        // ADDING ROUTE #1
         List<Route> RouteList = new ArrayList<>();
-        RouteList.add(new Route("Saturday Nights", "Enjoy the best places for hangout on La Zona Colonial.", "Blablabla", SaturdayRoute));
-        RouteList.add(new Route("Museum Route", "Take a look for a important cultural places on La Zona Colonial.","", MuseumRoute));
-        RouteList.add(new Route("Church Routes","See over uppon Catholic places. \nIdeal for Sundays and Family trips.","",ChurchRoute));
-        RouteList.add(new Route("Custom Routes","Make your own route using our selected places.","",CustomRoute));
+        RouteList.add(new Route("Saturday Nights", "Enjoy the best places for hangout on La Zona Colonial.",
+                R.drawable.saturday_route, SaturdayRoute));
+        RouteList.add(new Route("Museum Route", "Take a look for a important cultural places on La Zona Colonial.",
+                R.drawable.museum_route, MuseumRoute));
+        RouteList.add(new Route("Church Routes","See over uppon Catholic places. \nIdeal for Sundays and Family trips.",
+                R.drawable.church_route,ChurchRoute));
+        RouteList.add(new Route("Custom Routes","Make your own route using our selected places.",
+                R.drawable.custom_route,CustomRoute));
 
         mRoutes = RouteList.toArray(new Route[RouteList.size()]);
         myListView.setAdapter(new ListAdapter(mRoutes));
@@ -131,9 +132,11 @@ public class RouteActivity extends AppCompatActivity
 
             TextView textTitle = (TextView)convertView.findViewById(R.id.route_row_title);
             TextView textDescription = (TextView)convertView.findViewById(R.id.route_row_description);
+            ImageView imageView = (ImageView)convertView.findViewById(R.id.route_row_image);
 
             textTitle.setText(mRoutes[position].getName());
             textDescription.setText(mRoutes[position].getDescription());
+            imageView.setImageResource(mRoutes[position].getUrl());
 
             return convertView;
         }

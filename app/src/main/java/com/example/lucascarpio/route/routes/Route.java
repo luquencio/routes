@@ -12,11 +12,11 @@ public class Route implements Serializable{
 
     String mName;
     String mDescription;
-    String mUrl;
+    int mUrl;
     List<LatLng> mLocations;
 
 
-    Route(String Name, String Description, String Url, List<LatLng> locations) {
+    Route(String Name, String Description, int Url, List<LatLng> locations) {
         mName = Name;
         mDescription = Description;
         mUrl = Url;
@@ -32,11 +32,7 @@ public class Route implements Serializable{
         return mDescription;
     }
 
-    public String getUrl() {
-        return mUrl;
-    }
-
-    public String getmUrl() {
+    public int getUrl() {
         return mUrl;
     }
 
