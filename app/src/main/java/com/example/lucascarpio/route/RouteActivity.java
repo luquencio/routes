@@ -112,10 +112,9 @@ public class RouteActivity extends AppCompatActivity
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                 Intent intent = new Intent(RouteActivity.this, RouteDetail.class);
-                intent.putExtra("Route", mRoutes[position]);
-                startActivity(intent);
-
+            Intent intent = new Intent(RouteActivity.this, RouteDetail.class);
+            intent.putExtra("Route", mRoutes[position]);
+            startActivity(intent);
             }
         });
     }

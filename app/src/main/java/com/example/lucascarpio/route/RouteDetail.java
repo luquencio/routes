@@ -21,17 +21,18 @@ public class RouteDetail extends Activity{
 
         mMyBrowser = (WebView)findViewById(R.id.view_route);
 
+        mRoute = (Route)getIntent().getSerializableExtra("Route");
 
-        if (mRoute.getName()=="SaturdayRoute"){
+        if (mRoute.getName().equals("Saturday Nights")){
             mMyBrowser.loadUrl("file:///android_asset/SaturdayRoutes.html");
         }
-        if (mRoute.getName()=="MuseumRoute"){
+        if (mRoute.getName().equals("Museum Route")){
             mMyBrowser.loadUrl("file:///android_asset/MuseumRoutes.html");
         }
-        if (mRoute.getName()=="ChurchRoute"){
+        if (mRoute.getName().equals("Church Routes")){
             mMyBrowser.loadUrl("file:///android_asset/ChurchesRoutes.html");
         }
-        if (mRoute.getName()=="CustomRoute"){
+        if (mRoute.getName().equals("Custom Routes")){
             mMyBrowser.loadUrl("file:///android_asset/CustomRoutes.html");
         }
 
