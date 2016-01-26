@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
 
         android:paddingLeft="5dp"
-        android:text="Routes"
+        android:text="Route"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

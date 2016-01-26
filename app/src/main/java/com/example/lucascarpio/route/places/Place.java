@@ -18,7 +18,7 @@ public class Place implements Comparable<Place>, Serializable{
     private double mLongitude;
     private String mImageURL;
 
-    Place(ParseObject place)
+    public Place(ParseObject place)
     {
         mName = place.getString("nombre");
         mDescription = place.getString("descripcion");

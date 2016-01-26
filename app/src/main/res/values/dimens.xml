@@ -14,4 +14,7 @@
     <dimen name="custom_tab_layout_height">72dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
+    <!-- Floating Button -->
+    <dimen name="sub_action_button_size">48dp</dimen>
+    <dimen name="sub_action_button_content_margin">12dp</dimen>
 </resources>
