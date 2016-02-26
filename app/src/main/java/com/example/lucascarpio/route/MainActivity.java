@@ -25,6 +25,7 @@ import com.example.lucascarpio.route.events.EventsActivity;
 import com.example.lucascarpio.route.places.Place;
 import com.example.lucascarpio.route.places.PlacesActivity;
 import com.example.lucascarpio.route.routes.RouteActivity;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,6 +48,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
@@ -60,12 +66,20 @@ public class MainActivity extends AppCompatActivity
     private static final String BAR_CATEGORY = "DISCO";
     private static final String CHURCH_CATEGORY = "IGLESIA";
 
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Admob specs
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+
 
         //Floating Button Settings
         int subActionButtonSize = getResources().getDimensionPixelSize(R.dimen.sub_action_button_size);
@@ -189,6 +203,7 @@ public class MainActivity extends AppCompatActivity
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        
 
     }
 
